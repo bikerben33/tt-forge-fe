@@ -4,11 +4,11 @@ Following page describes how to build the project on your local machine.
 
 ## Prerequisites
 Main project dependencies are:
-1. Clang 17
-1. Ninja
-1. CMake 3.20 or higher
-1. Git LFS
-1. Python 3.10 or higher
+- Clang 17
+- Ninja
+- CMake 3.20 or higher
+- Git LFS
+- Python 3.10 or higher
 
 On Ubuntu 22.04 systems, you can install these dependencies using the following commands:
 ```sh
@@ -35,9 +35,9 @@ python3 --version
 ```
 
 ## Build environment
-This is one off step to build the toolchain and create virtual environment for tt-forge. Generally you need to run this step only once, unless you want to update the toolchain (LLVM).
+This is a one off step to build the toolchain and create a virtual environment for tt-forge. Generally you need to run this step only once, unless you want to update the toolchain (LLVM).
 
-First, it's required to create toolchain directories. Proposed example creates directories in default paths. You can change the paths if you want to use different locations (see build environment section below).
+First, it's required to create toolchain directories. The example below will create driectories in default paths. To change the default directory paths, see the build environment section below.
 ```sh
 # FFE related toolchain (dafault path)
 sudo mkdir -p /opt/ttforge-toolchain
@@ -71,7 +71,7 @@ cmake -G Ninja -B build
 cmake --build build
 ```
 
-You can pass additional options to the `cmake` command to customize the build. For example, to build everything in debug mode, you can run:
+You can pass additional options to the `cmake` command to customize the build. For example, to build everything in debug mode:
 ```sh
 cmake -G Ninja -B build -DCMAKE_BUILD_TYPE=Debug
 cmake --build build
@@ -82,9 +82,9 @@ cmake --build build
 > - `-DTTMLIR_RUNTIME_DEBUG=ON|OFF`     - Build runtime debug tools (more logging, debug environment flags)
 
 ### Incremental build
-If you have made changes to the C++ sources (of the `tt-forge-fe` compiler, `tt-mlir` or `tt-metal`), you might want to do an incremental build to save time. This can be done by running the following command:
+If you have made changes to the C++ sources (of the `tt-forge-fe` compiler, `tt-mlir`, or `tt-metal`),  an incremental build can save time. This can be done by running the following command:
 ```sh
-# If you are not already inside the virtual environment, activate it
+# If you are not already inside the virtual environment, activate it:
 source env/activate
 
 cmake --build build -- install_ttforge
@@ -94,7 +94,7 @@ This will build `tt-forge-fe` C++ sources and the dependencies (`tt-mlir`, `tt-m
 
 ## Build docs
 
-To build documentation `mdbook` is required, see the installation guide [here](./tools.md#mdbook).
+To build documentation, `mdbook` is required. See the [installation guide](./tools.md#mdbook) for details.
 
 After installing `mdbook`, run the following commands to build and serve the documentation:
 
@@ -106,9 +106,9 @@ cmake --build build -- docs
 mdbook serve build/docs
 ```
 
-> **Note:** `mdbook serve` will by default create a local server at `http://localhost:3000`.
+> **Note:** `mdbook serve` will  create a local server at `http://localhost:3000` by default.
 
-> **Note:** For custom port, just specify `-p` attribute. <br><br> E.g. `mdbook serve build/docs -p 5005`, and visit `http://localhost:5005`.
+> **Note:** For a custom port, specify the `-p` attribute. <br><br> E.g. `mdbook serve build/docs -p 5005`, and visit `http://localhost:5005`.
 
 ## Build Cleanup
 
@@ -133,7 +133,7 @@ To ensure a clean build environment, follow these steps to remove existing build
     ./clean_build.sh
     rm -rf env/build third_party/tt-mlir/env/build
     ```
-    > **Note:** This should rarely be needed, as it removes the entire build and environment (consequently entire toolchain will need to be rebuilt).
+    > **Note:** This  removes the entire build and environment and should only be used in rare instances. If used, the entire toolchain will need to be rebuilt.
 
 ## Useful build environment variables
 1. `TTMLIR_TOOLCHAIN_DIR` - Specifies the directory where TTMLIR dependencies will be installed. Defaults to `/opt/ttmlir-toolchain` if not defined.
